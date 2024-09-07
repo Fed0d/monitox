@@ -1,0 +1,48 @@
+# https://pre-commit.com/
+# https://pre-commit.com/hooks.html
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      # https://github.com/pre-commit/pre-commit-hooks/blob/main/.pre-commit-hooks.yaml
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: trailing-whitespace
+        exclude_types: [python]
+      - id: end-of-file-fixer
+        exclude_types: [python]
+  - repo: https://github.com/google/yamlfmt
+    rev: v0.11.0
+    hooks:
+      # https://github.com/google/yamlfmt/blob/main/.pre-commit-hooks.yaml
+      - id: yamlfmt
+        name: format files with yamlfmt
+        exclude: ^helm/templates/
+        require_serial: true
+  - repo: local
+    hooks:
+      # https://docs.astral.sh/ruff/linter/
+      # https://github.com/astral-sh/ruff-pre-commit/blob/main/.pre-commit-hooks.yaml
+      - id: ruff-sort-imports
+        name: sort imports with ruff
+        types: [python]
+        language: system
+        entry: ruff check
+        require_serial: true
+        args: [--force-exclude, --fix, --select, I]
+      # https://docs.astral.sh/ruff/formatter/
+      - id: ruff-format
+        name: format files with ruff
+        types: [python]
+        language: system
+        entry: ruff format
+        require_serial: true
+        args: [--force-exclude]
+      # https://docs.astral.sh/ruff/linter/
+      - id: ruff-check
+        name: check and fix files with ruff
+        types: [python]
+        language: system
+        entry: ruff check
+        require_serial: true
+        args: [--force-exclude, --fix, --ignore, I]

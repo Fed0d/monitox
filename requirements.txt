@@ -1,2 +1,13 @@
 aiogram
 python-decouple
+
+alembic
+psycopg2-binary
+alchemy
+pydentic
+pydantic-settings
+python-dotenv
+orjson
+pathlib
+
+mistralai

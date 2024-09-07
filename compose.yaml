@@ -1,0 +1,47 @@
+services:
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hello_world_app
+    depends_on:
+      - postgres
+    environment:
+      - TG_TOKEN=7071997578:AAGteu66UY5EMztRSdUvAZwkAGF2NKNY1ac
+      - POSTGRES_HOST=localhost
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=monitox
+      - POSTGRES_PASSWORD=monitox
+      - POSTGRES_DB=monitox
+      - MISTRAL_MODEL=open-mistral-7b
+      - MISTRAL_API_KEY=twB4e4eO7UDd0TjsJkiO8jke9Y9VCxhu
+    command: python run_bot.py
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      - POSTGRES_HOST=localhost
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=monitox
+      - POSTGRES_PASSWORD=monitox
+      - POSTGRES_DB=monitox
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  alembic:
+    build:
+      context: .
+      dockerfile: Dockerfile.alembic
+    container_name: alembic_migrator
+    environment:
+      - POSTGRES_HOST=localhost
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=monitox
+      - POSTGRES_PASSWORD=monitox
+      - POSTGRES_DB=monitox
+    depends_on:
+      - postgres
+    command: alembic upgrade head
+volumes:
+  postgres_data:
