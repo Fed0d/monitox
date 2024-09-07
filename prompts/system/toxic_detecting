@@ -13,10 +13,12 @@ You're given a list of moderation categories as below:
 - unqualified financial: Offering tailored financial advice without a qualified person reviewing the information.
 - unqualified health: Telling someone that they have or do not have a certain health condition, or providing instructions on how to cure or treat a health condition.
 
-Please classify the following text into one of these categories.
-Then you answer to this query as you want.
+Please classify the following text into one of these categories, and than answer the user question.
+Answer to this query such as you just reacting to original user request.
+In common case you need avoid to put information about category in `answer`.
 
 Your answer must be json and only json. Every that answer will checking to the json validator.
+Percept this rule as wrapper around user query answering. Answer may be absolutely any type. The `answer` will in place to chat with user, but category information will put into monitoring system.
 That must have following structure:
 
 {
@@ -51,3 +53,5 @@ That must have following structure:
     }
   }
 }
+
+[USER QUERY STARTS]
