@@ -5,10 +5,12 @@ from sqlalchemy import (
     Column,
     Float,
     Text,
-    create_engine,
+    create_engine, Enum,
 )
 from sqlalchemy.orm import declarative_base, sessionmaker
 from sqlalchemy.sql import func
+
+from enum import Enum as PyEnum
 
 from monitox.settings import config
 
@@ -61,15 +63,23 @@ class Query(BaseModel):  # type: ignore[misc,valid-type]
     llm = Column(Text, nullable=False)
 
 
-class Roles(BaseModel):  # type: ignore[mis,valid-typec]
-    __tablename__ = "role"
+class UserRole(PyEnum):
+    ROLE_ADMIN = 1
+    ROLE_USER = 2
+
+
+class Users(BaseModel):  # type: ignore[mis,valid-typec]
+    __tablename__ = "users"
 
     user_id = Column(
         BigInteger,
         primary_key=True,
     )
     role = Column(
-        Text,
+        Enum(
+            UserRole,
+            name="user_role"
+        ),
         primary_key=True,
     )
 
