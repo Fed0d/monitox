@@ -1,16 +1,17 @@
+from enum import Enum as PyEnum
+
 from sqlalchemy import (
     TIMESTAMP,
     BigInteger,
     Boolean,
     Column,
+    Enum,
     Float,
     Text,
-    create_engine, Enum,
+    create_engine,
 )
 from sqlalchemy.orm import declarative_base, sessionmaker
 from sqlalchemy.sql import func
-
-from enum import Enum as PyEnum
 
 from monitox.settings import config
 
@@ -76,10 +77,7 @@ class Users(BaseModel):  # type: ignore[mis,valid-typec]
         primary_key=True,
     )
     role = Column(
-        Enum(
-            UserRole,
-            name="user_role"
-        ),
+        Enum(UserRole, name="user_role"),
         primary_key=True,
     )
 

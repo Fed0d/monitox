@@ -1,4 +1,4 @@
-from monitox.models import Session, Users, UserRole
+from monitox.models import Session, UserRole, Users
 
 
 def process_start(user_id: int) -> None:

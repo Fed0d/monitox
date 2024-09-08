@@ -30,16 +30,18 @@ repos:
         entry: ruff check
         require_serial: true
         args: [--force-exclude, --fix, --select, I]
-      # https://docs.astral.sh/ruff/formatter/
       - id: ruff-format
+        # https://docs.astral.sh/ruff/formatter/
+
         name: format files with ruff
         types: [python]
         language: system
         entry: ruff format
         require_serial: true
         args: [--force-exclude]
-      # https://docs.astral.sh/ruff/linter/
       - id: ruff-check
+        # https://docs.astral.sh/ruff/linter/
+
         name: check and fix files with ruff
         types: [python]
         language: system
