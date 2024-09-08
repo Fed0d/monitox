@@ -70,7 +70,7 @@ class UserRole(PyEnum):
 
 
 class Role(BaseModel):
-    __tablename__ = "roles"
+    __tablename__ = "role"
 
     user_id = Column(
         BigInteger,
