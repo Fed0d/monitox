@@ -6,6 +6,7 @@ from aiogram.types import Message
 
 import monitox.keyboards as kb
 from monitox.llm.query_proxy import process_query
+from monitox.services.start import process_start
 
 router = Router()
 
@@ -16,6 +17,7 @@ class Dialog(StatesGroup):
 
 @router.message(CommandStart())
 async def process_start_command(message: Message):
+    process_start(user_id=message.from_user.id)
     await message.answer(
         "Привет!\n" "Я - бот, который отвечает на вопросы.", reply_markup=kb.start
     )

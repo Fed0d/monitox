@@ -1,8 +1,11 @@
+from enum import Enum as PyEnum
+
 from sqlalchemy import (
     TIMESTAMP,
     BigInteger,
     Boolean,
     Column,
+    Enum,
     Float,
     Text,
     create_engine,
@@ -15,7 +18,7 @@ from monitox.settings import config
 BaseModel = declarative_base()
 
 
-class ToxicityAnalysis(BaseModel):  # type: ignore[misc,valid-type]
+class ToxicityAnalysis(BaseModel):
     __tablename__ = "toxicity_analysis"
 
     id = Column(BigInteger, primary_key=True, autoincrement=True)
@@ -48,7 +51,7 @@ class ToxicityAnalysis(BaseModel):  # type: ignore[misc,valid-type]
     violence_score = Column(Float, nullable=False)
 
 
-class Query(BaseModel):  # type: ignore[misc,valid-type]
+class Query(BaseModel):
     __tablename__ = "query"
 
     id = Column(BigInteger, primary_key=True, autoincrement=True)
@@ -61,7 +64,12 @@ class Query(BaseModel):  # type: ignore[misc,valid-type]
     llm = Column(Text, nullable=False)
 
 
-class Roles(BaseModel):  # type: ignore[mis,valid-typec]
+class UserRole(PyEnum):
+    ROLE_ADMIN = 1
+    ROLE_USER = 2
+
+
+class Role(BaseModel):
     __tablename__ = "role"
 
     user_id = Column(
@@ -69,7 +77,7 @@ class Roles(BaseModel):  # type: ignore[mis,valid-typec]
         primary_key=True,
     )
     role = Column(
-        Text,
+        Enum(UserRole, name="user_role"),
         primary_key=True,
     )
 
