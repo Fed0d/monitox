@@ -18,7 +18,7 @@ from monitox.settings import config
 BaseModel = declarative_base()
 
 
-class ToxicityAnalysis(BaseModel):  # type: ignore[misc,valid-type]
+class ToxicityAnalysis(BaseModel):
     __tablename__ = "toxicity_analysis"
 
     id = Column(BigInteger, primary_key=True, autoincrement=True)
@@ -51,7 +51,7 @@ class ToxicityAnalysis(BaseModel):  # type: ignore[misc,valid-type]
     violence_score = Column(Float, nullable=False)
 
 
-class Query(BaseModel):  # type: ignore[misc,valid-type]
+class Query(BaseModel):
     __tablename__ = "query"
 
     id = Column(BigInteger, primary_key=True, autoincrement=True)
@@ -69,8 +69,8 @@ class UserRole(PyEnum):
     ROLE_USER = 2
 
 
-class Users(BaseModel):  # type: ignore[mis,valid-typec]
-    __tablename__ = "users"
+class Role(BaseModel):
+    __tablename__ = "roles"
 
     user_id = Column(
         BigInteger,
