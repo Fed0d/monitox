@@ -16,6 +16,8 @@ services:
       - MISTRAL_MODEL=open-mistral-7b
       - MISTRAL_API_KEY=twB4e4eO7UDd0TjsJkiO8jke9Y9VCxhu
     command: python run_bot.py
+    ports:
+      - "8000:8000"
   postgres:
     image: postgres:15
     container_name: postgres
@@ -47,5 +49,21 @@ services:
     depends_on:
       - postgres
     command: alembic upgrade head
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    depends_on:
+      - bot
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
 volumes:
   postgres_data:
