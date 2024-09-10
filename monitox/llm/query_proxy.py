@@ -46,14 +46,6 @@ def process_query(user_id: int, user_query: str) -> str:
             toxicity_analysis = ToxicityAnalysis(
                 flagged=response.toxicity_analysis.flagged,
                 **orjson.loads(response.toxicity_analysis.categories.model_dump_json()),
-                **dict(
-                    [
-                        (f"{key}_score", value)
-                        for (key, value) in orjson.loads(
-                            response.toxicity_analysis.category_scores.model_dump_json()
-                        ).items()
-                    ]
-                ),
             )
 
             session.add(toxicity_analysis)
