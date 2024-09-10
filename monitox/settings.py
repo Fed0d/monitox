@@ -30,10 +30,15 @@ class LargeLanguageModel(BaseModel):
     mistral: Mistral = Mistral()  # type: ignore[call-arg]
 
 
+class MetricsConfig(BaseSettings):
+    port: int = Field(default=8001, validation_alias="METRICS_PORT")
+
+
 class MonitoxConfig(BaseModel):
     postgres: Postgres = Postgres()
     bot: TelegramBot = TelegramBot()
     llm: LargeLanguageModel = LargeLanguageModel()
+    metrics: MetricsConfig = MetricsConfig()
 
 
 config = MonitoxConfig()
