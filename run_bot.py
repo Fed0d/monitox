@@ -8,6 +8,7 @@ async def main():
     dp.startup.register(set_commands)
     await dp.start_polling(bot)
 
+
 if __name__ == "__main__":
     try:
         asyncio.run(main())

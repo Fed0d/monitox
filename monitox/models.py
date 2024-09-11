@@ -6,7 +6,6 @@ from sqlalchemy import (
     Boolean,
     Column,
     Enum,
-    Float,
     Text,
     create_engine,
 )
@@ -36,19 +35,19 @@ class ToxicityAnalysis(BaseModel):
     self_harm_instructions = Column(Boolean, nullable=False)
     harassment_threatening = Column(Boolean, nullable=False)
     violence = Column(Boolean, nullable=False)
-
-    # Category Scores
-    sexual_score = Column(Float, nullable=False)
-    hate_score = Column(Float, nullable=False)
-    harassment_score = Column(Float, nullable=False)
-    self_harm_score = Column(Float, nullable=False)
-    sexual_minors_score = Column(Float, nullable=False)
-    hate_threatening_score = Column(Float, nullable=False)
-    violence_graphic_score = Column(Float, nullable=False)
-    self_harm_intent_score = Column(Float, nullable=False)
-    self_harm_instructions_score = Column(Float, nullable=False)
-    harassment_threatening_score = Column(Float, nullable=False)
-    violence_score = Column(Float, nullable=False)
+    illegal = Column(Boolean, nullable=False)
+    child_abuse = Column(Boolean, nullable=False)
+    hate_violence_harassment = Column(Boolean, nullable=False)
+    malware = Column(Boolean, nullable=False)
+    physical_harm = Column(Boolean, nullable=False)
+    economic_harm = Column(Boolean, nullable=False)
+    fraud = Column(Boolean, nullable=False)
+    adult = Column(Boolean, nullable=False)
+    political = Column(Boolean, nullable=False)
+    privacy = Column(Boolean, nullable=False)
+    unqualified_law = Column(Boolean, nullable=False)
+    unqualified_financial = Column(Boolean, nullable=False)
+    unqualified_health = Column(Boolean, nullable=False)
 
 
 class Query(BaseModel):
