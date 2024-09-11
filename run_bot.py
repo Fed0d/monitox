@@ -4,7 +4,7 @@ from monitox.bot import bot, dp, logger
 from monitox.commands import set_commands
 from monitox.handlers import router
 from monitox.metrics import update_system_metrics
-from monitox.settings import config  
+from monitox.settings import config
 
 REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing request')
 
