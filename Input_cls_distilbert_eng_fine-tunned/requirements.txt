@@ -1,5 +1,5 @@
 detoxify==0.5.2
-transformers==
+transformers
 lightning==2.4.0
-torch==2.4.0+cu121
+torch
 transformers==4.44.2
