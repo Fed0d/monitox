@@ -32,13 +32,24 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  postgres_exporter:
+    image: prometheuscommunity/postgres-exporter
+    container_name: postgres_exporter
+    environment:
+      - DATA_SOURCE_NAME=postgresql://monitox:monitox@postgres:5432/monitox?sslmode=disable
+    ports:
+      - "9187:9187"
+    depends_on:
+      - postgres
+
   alembic:
     build:
       context: .
       dockerfile: Dockerfile.alembic
     container_name: alembic_migrator
     environment:
-      - TG_TOKEN=7071997578:AAGteu66UY5EMztRSdUvAZwkAGF2NKNY1ac
+    - TG_TOKEN=7071997578:AAGteu66UY5EMztRSdUvAZwkAGF2NKNY1ac
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
       - POSTGRES_USER=monitox
@@ -57,7 +68,8 @@ services:
     ports:
       - "9090:9090"
     depends_on:
-      - bot
+      - postgres_exporter
+
   grafana:
     image: grafana/grafana
     container_name: grafana
