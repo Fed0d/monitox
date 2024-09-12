@@ -49,7 +49,7 @@ services:
       dockerfile: Dockerfile.alembic
     container_name: alembic_migrator
     environment:
-    - TG_TOKEN=7071997578:AAGteu66UY5EMztRSdUvAZwkAGF2NKNY1ac
+      - TG_TOKEN=7071997578:AAGteu66UY5EMztRSdUvAZwkAGF2NKNY1ac
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
       - POSTGRES_USER=monitox
