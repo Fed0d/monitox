@@ -1,7 +1,9 @@
 import asyncio
+
 from monitox.bot import bot, dp, logger
 from monitox.commands import set_commands
 from monitox.handlers import router
+
 
 async def main():
     dp.include_router(router)

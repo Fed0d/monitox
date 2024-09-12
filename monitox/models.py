@@ -6,6 +6,8 @@ from sqlalchemy import (
     Boolean,
     Column,
     Enum,
+    Float,
+    ForeignKey,
     Text,
     create_engine,
 )
@@ -20,7 +22,10 @@ BaseModel = declarative_base()
 class ToxicityAnalysis(BaseModel):
     __tablename__ = "toxicity_analysis"
 
-    id = Column(BigInteger, primary_key=True, autoincrement=True)
+    query_id = Column(
+        BigInteger, ForeignKey("query.id"), primary_key=True, nullable=False
+    )
+
     flagged = Column(Boolean, nullable=False)
 
     # Categories
@@ -48,6 +53,21 @@ class ToxicityAnalysis(BaseModel):
     unqualified_law = Column(Boolean, nullable=False)
     unqualified_financial = Column(Boolean, nullable=False)
     unqualified_health = Column(Boolean, nullable=False)
+
+
+class VulnerabilityAnalysis(BaseModel):
+    __tablename__ = "vulnerability_analysis"
+
+    query_id = Column(
+        BigInteger, ForeignKey("query.id"), primary_key=True, nullable=False
+    )
+
+    flagged = Column(Boolean, nullable=False)
+
+    # Categories
+    benign = Column(Float, nullable=False)
+    jailbreak = Column(Float, nullable=False)
+    prompt_injection = Column(Float, nullable=False)
 
 
 class Query(BaseModel):
