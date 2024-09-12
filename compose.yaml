@@ -18,6 +18,14 @@ services:
     command: python run_bot.py
     ports:
       - "8000:8000"
+  vulnerability_analysis_server:
+    build:
+      context: .
+      dockerfile: Dockerfile.vulneribility-analysis
+    container_name: vulnerability_analysis_server
+    command: python server.py
+    ports:
+      - "8069:8000"
   postgres:
     image: postgres:15
     container_name: postgres

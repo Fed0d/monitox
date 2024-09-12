@@ -1,0 +1,18 @@
+FROM python:3.12-slim
+
+ENV PYTHONUNBUFFERED=1
+
+RUN apt-get update && \
+    apt-get install -y wget && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY vulnerability-analysis/requirements.txt /app/
+COPY vulnerability-analysis/analysis.py /app/
+COPY vulnerability-analysis/server.py /app/
+
+RUN pip install --no-cache-dir -r requirements.txt
+RUN wget -O model.ckpt 'https://huggingface.co/Bogdan01m/Distilbert_input_classifier/resolve/main/trained_model.ckpt?download=true'
+
+CMD ["python", "server.py"]
