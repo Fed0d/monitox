@@ -36,3 +36,13 @@ class ToxicityAnalysis(BaseModel):
 class AnalysisResponse(BaseModel):
     answer: str
     toxicity_analysis: ToxicityAnalysis
+
+
+class VulnerabilityResponse(BaseModel):
+    benign: float
+    jailbreak: float
+    prompt_injection: float
+
+
+class VulnerabilityRequest(BaseModel):
+    text: str
