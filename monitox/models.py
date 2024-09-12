@@ -22,8 +22,9 @@ BaseModel = declarative_base()
 class ToxicityAnalysis(BaseModel):
     __tablename__ = "toxicity_analysis"
 
-    id = Column(BigInteger, primary_key=True, autoincrement=True)
-    query_id = Column(BigInteger, ForeignKey("query.id"), nullable=False)
+    query_id = Column(
+        BigInteger, ForeignKey("query.id"), primary_key=True, nullable=False
+    )
 
     flagged = Column(Boolean, nullable=False)
 
@@ -57,8 +58,9 @@ class ToxicityAnalysis(BaseModel):
 class VulnerabilityAnalysis(BaseModel):
     __tablename__ = "vulnerability_analysis"
 
-    id = Column(BigInteger, primary_key=True, autoincrement=True)
-    query_id = Column(BigInteger, ForeignKey("query.id"), nullable=False)
+    query_id = Column(
+        BigInteger, ForeignKey("query.id"), primary_key=True, nullable=False
+    )
 
     flagged = Column(Boolean, nullable=False)
 
