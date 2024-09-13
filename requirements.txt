@@ -11,6 +11,3 @@ orjson
 pathlib
 
 mistralai
-prometheus-client
-aiohttp
-psutil

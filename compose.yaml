@@ -18,14 +18,15 @@ services:
     command: python run_bot.py
     ports:
       - "8000:8000"
-  vulnerability_analysis_server:
-    build:
-      context: .
-      dockerfile: Dockerfile.vulneribility-analysis
-    container_name: vulnerability_analysis_server
-    command: python server.py
-    ports:
-      - "8069:8000"
+  #  vulnerability_analysis_server:
+
+  #    build:
+  #      context: .
+  #      dockerfile: Dockerfile.vulneribility-analysis
+  #    container_name: vulnerability_analysis_server
+  #    command: python server.py
+  #    ports:
+  #      - "8069:8000"
   postgres:
     image: postgres:15
     container_name: postgres
@@ -40,7 +41,6 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
   postgres_exporter:
     image: prometheuscommunity/postgres-exporter
     container_name: postgres_exporter
@@ -50,34 +50,32 @@ services:
       - "9187:9187"
     depends_on:
       - postgres
-
+    command:
+      - --include-databases
   alembic:
     build:
       context: .
       dockerfile: Dockerfile.alembic
     container_name: alembic_migrator
-    environment:
-      - TG_TOKEN=7071997578:AAGteu66UY5EMztRSdUvAZwkAGF2NKNY1ac
-      - POSTGRES_HOST=postgres
-      - POSTGRES_PORT=5432
-      - POSTGRES_USER=monitox
-      - POSTGRES_PASSWORD=monitox
-      - POSTGRES_DB=monitox
-      - MISTRAL_MODEL=open-mistral-7b
-      - MISTRAL_API_KEY=twB4e4eO7UDd0TjsJkiO8jke9Y9VCxhu
     depends_on:
       - postgres
     command: alembic upgrade head
+  py_prometheus:
+    build:
+      context: prometheus
+    image: py_prometheus
+    container_name: py_prometheus
+    ports:
+      - "8001:8001"
   prometheus:
     image: prom/prometheus
     container_name: prometheus
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - "9090:9090"
     depends_on:
       - postgres_exporter
-
   grafana:
     image: grafana/grafana
     container_name: grafana
