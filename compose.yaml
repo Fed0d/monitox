@@ -15,9 +15,8 @@ services:
       - POSTGRES_DB=monitox
       - MISTRAL_MODEL=open-mistral-7b
       - MISTRAL_API_KEY=twB4e4eO7UDd0TjsJkiO8jke9Y9VCxhu
-    command: python run_bot.py
     ports:
-      - "8000:8000"
+      - "8001:8000"
   postgres:
     image: postgres:15
     container_name: postgres
@@ -31,7 +30,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./pgdata:/var/lib/postgresql/data/pgdata
+      - ./pgdata:/var/lib/postgresql/data
   alembic:
     build:
       context: .
@@ -44,4 +43,4 @@ services:
     image: grafana/grafana
     container_name: grafana
     ports:
-      - "3000:3000"
+      - "8002:3000"

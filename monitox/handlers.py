@@ -3,7 +3,7 @@ from aiogram.filters import Command, CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import Message
-
+from aiogram.enums import ParseMode
 import monitox.keyboards as kb
 from monitox.llm.query_proxy import process_query
 from monitox.services.start import process_start
@@ -49,5 +49,5 @@ async def process_dialog(message: Message):
         user_id=message.from_user.id,
         user_query=message.text,
     )
-    await message.answer(answer)
+    await message.answer(answer,parse_mode=ParseMode.MARKDOWN)
     # await message.answer('Я не знаю, что ответить. Попробуйте задать другой вопрос.')
