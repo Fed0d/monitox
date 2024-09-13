@@ -50,8 +50,6 @@ services:
       - "9187:9187"
     depends_on:
       - postgres
-    command:
-      - --include-databases
   alembic:
     build:
       context: .
