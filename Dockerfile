@@ -11,4 +11,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /app/
 
-CMD ["python", "run_bot.py"]
+CMD ["python", "monitox/run_bot.py"]
