@@ -6,6 +6,7 @@ COPY alembic.ini .
 COPY alembic/ ./alembic
 COPY monitox/ ./monitox/
 COPY requirements.txt .
+COPY dev.env .env
 
 RUN pip install -r requirements.txt
 

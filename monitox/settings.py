@@ -34,16 +34,11 @@ class VulnerabilityModel(BaseSettings):
     vulnerability_url: str = Field(validation_alias="VULNERABILITY_URL")
 
 
-class MetricsConfig(BaseSettings):
-    port: int = Field(default=8001, validation_alias="METRICS_PORT")
-
-
 class MonitoxConfig(BaseModel):
     postgres: Postgres = Postgres()
     bot: TelegramBot = TelegramBot()
     llm: LargeLanguageModel = LargeLanguageModel()
     vulnerability: VulnerabilityModel = VulnerabilityModel()
-    metrics: MetricsConfig = MetricsConfig()
 
 
 config = MonitoxConfig()
